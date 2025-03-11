@@ -1,10 +1,12 @@
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "../Styles/HomePage.css";
+import { useState } from "react";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import { FaCheck } from "react-icons/fa";
-import {FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import logo from "../assets/images/logo smooth.png";
 import heroimg from "../assets/images/Group 34.png";
 import step1 from "../assets/images/Step 1.png";
@@ -53,6 +55,7 @@ const services = [
 ];
 
 function HomePage() {
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         AOS.init({ duration: 1000 });
@@ -68,12 +71,14 @@ function HomePage() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link href="#">Home</Nav.Link>
+                            <Nav.Link href="#home">Home</Nav.Link>
                             <Nav.Link href="#how-it-works">How it works</Nav.Link>
                             <NavDropdown title="Services" id="services-dropdown">
-                                <NavDropdown.Item href="#">Pickup</NavDropdown.Item>
+                                {/* <NavDropdown.Item href="#">Pickup</NavDropdown.Item> */}
                                 <NavDropdown.Item href="#services">Drop-off</NavDropdown.Item>
+                                {/* <Link to="/steps">
                                 <NavDropdown.Item href="#">Laundry</NavDropdown.Item>
+                                </Link> */}
                             </NavDropdown>
                             <Nav.Link href="#socials">Contact Us</Nav.Link>
                         </Nav>
@@ -82,16 +87,17 @@ function HomePage() {
             </Navbar>
 
             {/* Hero Section */}
-            <div data-aos="fade-down" className="hero-section">
+            <div data-aos="fade-down" id="home" className="hero-section">
                 <div className="item">
                     <h1 className="display-1">
-                    Fresh clothes today, <div className="text-primary">Confidence tomorrow</div>
+                        Fresh clothes today, <div className="text-primary">Confidence tomorrow</div>
                     </h1>
                     <p className="text-muted">
-                    Keep your wardrobe fresh and your confidence high with our premium laundry services.  
-                    Hassle-free cleaning, so you always look and feel your best!
+                        Keep your wardrobe fresh and your confidence high with our premium laundry services.
+                        Hassle-free cleaning, so you always look and feel your best!
                     </p>
-                    <button  className="btn-click">How it works</button>
+                    <Link to="/steps">
+                        <button className="btn-click">How it works</button></Link>
                 </div>
 
                 <div className="item">
@@ -126,39 +132,44 @@ function HomePage() {
 
             {/* SERVICE SECTION */}
             <div data-aos="fade-up" id="services" className="services-container">
-    <h2 className="section-title">Services</h2>
-    <h1 className="section-heading">Services & Packages</h1>
+                <h2 className="section-title">Services</h2>
+                <h1 className="section-heading">Services & Packages</h1>
 
-    <div className="services-grid">
-        {services.map((category) => (
-            <div key={category.category} className="service-box">
-                <h2 className="category-title">{category.category}</h2>
+                <div className="services-grid">
+                    {services.map((category) => (
+                        <div key={category.category} className="service-box">
+                            <h2 className="category-title">{category.category}</h2>
 
-                <ul className="service-list">
-                    {category.items.map((service, index) => (
-                        <li key={index} className="service-item">
-                            <FaCheck className="check-icon" />
-                            <span>{service.name}</span>
-                            <strong className="service-price">{service.price}</strong>
-                        </li>
+                            <ul className="service-list">
+                                {category.items.map((service, index) => (
+                                    <li key={index} className="service-item">
+                                        <FaCheck className="check-icon" />
+                                        <span>{service.name}</span>
+                                        <strong className="service-price">{service.price}</strong>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     ))}
-                </ul>
-            </div>
-        ))}
-    </div>
+                </div>
 
-    {/* WhatsApp Button */}
-    <div className="whatsapp-container">
-        <a 
-            href="https://wa.me/+2349138204249" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="whatsapp-button"
-        >
-            <FaWhatsapp className="whatsapp-icon" /> Get in Touch
-        </a>
-    </div>
-</div>
+                <div className="free-delivery">
+                    🚚 Free Delivery!
+                </div>
+
+
+                {/* WhatsApp Button */}
+                <div className="whatsapp-container">
+                    <a
+                        href="https://wa.me/+2349138204249"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="whatsapp-button"
+                    >
+                        <FaWhatsapp className="whatsapp-icon" /> Get in Touch
+                    </a>
+                </div>
+            </div>
 
 
             {/* DECISION SECTION */}
@@ -170,8 +181,26 @@ function HomePage() {
                 <div className="decision-content">
                     <h3>Hard time deciding </h3>
                     <h3>what’s best for you?</h3>
-                    <button className="btn-learn-more">Learn more</button>
+                    <button onClick={() => setShowModal(true)} className="btn-learn-more">Learn more</button>
                 </div>
+            </div>
+
+
+            <div>
+
+
+                {showModal && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <h2>How We Work</h2>
+                            <p><strong>Step 1: We Wash</strong> - We carefully clean your clothes using eco-friendly detergents.</p>
+                            <p><strong>Step 2: We Dry</strong> - Clothes are dried using gentle techniques to preserve fabric quality.</p>
+                            <p><strong>Step 3: We Fold</strong> - Expert folding ensures neat, ready-to-wear clothes.</p>
+                            <p><strong>Step 4: We Deliver</strong> - Fast and convenient delivery right to your doorstep!</p>
+                            <button onClick={() => setShowModal(false)} className="close-btn">Close</button>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* FOOTER SECTION */}
@@ -183,10 +212,7 @@ function HomePage() {
                 <div className="footer-sections">
                     <div className="footer-mini-section">
                         <div className="footer-mini-section2">
-                            <h3>Services</h3>
-                            <p>Pickup</p>
-                            <p>Drop-off</p>
-                            <p>Laundry</p>
+                            <p>&copy; {new Date().getFullYear()} Smooth Laundry. All rights reserved.</p>
                         </div>
 
                         <div className="footer-mini-section2">
