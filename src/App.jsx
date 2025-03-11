@@ -4,14 +4,16 @@ import Steps from "./Components/Steps";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+
 function App() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
   return (
     <Router>
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />  {/* Fix: Homepage at "/" */}
         <Route path="/steps" element={<Steps />} />
       </Routes>
     </Router>

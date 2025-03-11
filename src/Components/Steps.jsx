@@ -48,7 +48,7 @@ const Stepsk = () => {
                     </div>
                 ))}
             </div>
-            <Link to="/home" className="back-link">Back to Home</Link>
+            <Link to="/" className="back-link">Back to Home</Link>
         </div>
     );
 };
