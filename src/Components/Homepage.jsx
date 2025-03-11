@@ -5,8 +5,8 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import { FaCheck } from "react-icons/fa";
 import {FaInstagram, FaWhatsapp } from "react-icons/fa";
-import logo from "../Assets/images/logo smooth.png";
-import heroimg from "../Assets/images/Group 34.png";
+import logo from "../assets/images/logo smooth.png";
+import heroimg from "../assets/images/Group 34.png";
 import step1 from "../assets/images/Step 1.png";
 import step2 from "../assets/images/Step 2.png";
 import step3 from "../assets/images/Step 3.png";
