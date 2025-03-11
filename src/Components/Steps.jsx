@@ -4,7 +4,7 @@ import dryImg from "../assets/images2/dry.jpg";
 import foldImg from "../assets/images2/wash.jpg";
 import deliverImg from "../assets/images2/delivery.jpg";
 import { useEffect } from "react";
-import "../styles/Steps.css"; // Ensure this file exists for styling
+import "../Styles/Steps.css"; // Ensure this file exists for styling
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 const Stepsk = () => {
